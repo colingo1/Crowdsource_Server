@@ -4,7 +4,7 @@
 $servername = "localhost";
 $username = "user";
 $password = "GurQFa27qzH5VxaA";
-$dbname = "crowdsourcing"
+$dbname = "crowdsourcing";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -44,6 +44,4 @@ if ($result->num_rows > 0) {
 $conn->close();
 ?>
 
-working on this stuff
-I can edit.
 </html>
