@@ -66,12 +66,7 @@ else
 	    session_start();
 	    $_SESSION["logged_in"] = true;
 	    $_SESSION["username"] = $user;
-<<<<<<< HEAD
 		$json = '{"id":"' . session_id() . '"}';
-=======
-		$result = array(error  => session_id());
-	    $json = json_encode($result);
->>>>>>> 92b0264d708e117bc574c6c9aac4da6e83a40b0e
 	    echo $json;
     }
 	$stmt->close();

@@ -17,7 +17,7 @@ $dbname = "crowdsourcing";
 	// prepare and bind
 	$question_id = json_decode(url_decode($_POST["json"]));
 	$stmt = $conn->prepare('SELECT * FROM questions WHERE id = ?');
-	$stmt->bind_param("i", $question_id);
+	$stmt->bind_param("i", $question_id->id);
 	// set parameters and execute
 	$stmt->execute();
 	$result=$stmt->get_result();
@@ -25,7 +25,7 @@ $dbname = "crowdsourcing";
 	//print_r($question_row);
 	//echo("<br />");
 	$stmt2 = $conn->prepare('SELECT * FROM answers WHERE question_id = ?');
-	$stmt2->bind_param("i", $question_id);
+	$stmt2->bind_param("i", $question_id->id);
 	$stmt2->execute();
 	$result2 = $stmt2->get_result();
 	$answers = array();
@@ -43,7 +43,6 @@ $dbname = "crowdsourcing";
 	$question_row["meta"]->time = $question_row["time"];
 	$question_row["meta"]->lat = $question_row["lat"];
 	$question_row["meta"]->lng = $question_row["lng"];
-	$question_row["meta"]->tags = $question_row["tags"];
 	
 	//print_r($answers);
 	//echo("<br />");

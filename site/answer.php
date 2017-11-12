@@ -4,8 +4,8 @@ $servername = "129.161.69.63";
 $db_username = "user";
 $db_password = "";
 $dbname = "crowdsourcing";
-//if($_SESSION["logged_in"]=true)
-//{
+if($_SESSION["logged_in"]=true)
+{
 	// Create connection
 	$conn = new mysqli($servername, $db_username, $db_password, $dbname);
 
@@ -29,5 +29,5 @@ $dbname = "crowdsourcing";
 
 	$conn->close();
 
-//}
+}
 ?>
