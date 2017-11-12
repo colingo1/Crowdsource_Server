@@ -31,7 +31,7 @@ if($data->action == "create")
 	if(!$stmt->execute())
 	{
 
-		$result = "This user already exists";
+		$result = array(error  => "This user already exists");
 		$json = json_encode($result);
 		echo($json);
 	}
@@ -48,7 +48,7 @@ else
 	$user = $data->username;
 	if(!$stmt->execute())
 	{
-		$result = "Try Again.";
+		$result = array(error  => "Try Again.");
 		$json = json_encode($result);
 		echo $json;
 	}
@@ -58,7 +58,7 @@ else
 
     if(password_verify ($data->password , PASSWORD_DEFAULT))
     {    	
-		$result = "Try Again.";
+		$result = array(error  => "Try Again.");
 		$json = json_encode($result);
 		echo $json;
     }
@@ -67,7 +67,8 @@ else
 	    session_start();
 	    $_SESSION["logged_in"] = true;
 	    $_SESSION["username"] = $user;
-	    $json = json_encode(session_id());
+		$result = array(error  => session_id());
+	    $json = json_encode($result);
 	    echo $json;
     }
 	$stmt->close();
