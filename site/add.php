@@ -16,9 +16,10 @@ if($_SESSION["logged_in"]=true)
 
 	// prepare and bind
 	$question = json_decode($_POST["json"]);
-	print_r($question);
-	$stmt = $conn->prepare("INSERT INTO questions (question,description,asker,location,tags,accepted_answer,rating) VALUES (?,?,?,?,?,0,?)");
-	$stmt->bind_param("sssssi", $question->title,$question->description,$_SESSION["username"], $question->location,$question->tags,$question->rating);
+	//print_r($question);
+	//echo($_SESSION["username"]);
+	$stmt = $conn->prepare("INSERT INTO questions (question,description,asker,lat,lng,tags,accepted_answer,rating) VALUES (?,?,?,?,?,?,0,?)");
+	$stmt->bind_param("sssddsi", $question->title,$question->description,$_SESSION["username"], $question->lat,$question->long,$question->tags,$question->rating);
 	$testing = "something";
 	// set parameters and execute
 	$stmt->execute();
