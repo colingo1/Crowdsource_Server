@@ -4,8 +4,8 @@ $servername = "129.161.69.63";
 $db_username = "user";
 $db_password = "";
 $dbname = "crowdsourcing";
-//if($_SESSION["logged_in"]=true)
-//{
+if($_SESSION["logged_in"]=true)
+{
 	// Create connection
 	$conn = new mysqli($servername, $db_username, $db_password, $dbname);
 
@@ -18,7 +18,7 @@ $dbname = "crowdsourcing";
 	$question = json_decode($_POST["json"]);
 	print_r($question);
 	$stmt = $conn->prepare("INSERT INTO questions (question,description,asker,location,tags,accepted_answer,rating) VALUES (?,?,?,?,?,0,?)");
-	$stmt->bind_param("sssssi", $question->title,$question->description,$testing, $question->location,$question->tags,$question->rating);
+	$stmt->bind_param("sssssi", $question->title,$question->description,$_SESSION["username"], $question->location,$question->tags,$question->rating);
 	$testing = "something";
 	// set parameters and execute
 	$stmt->execute();
@@ -28,5 +28,5 @@ $dbname = "crowdsourcing";
 
 	$conn->close();
 
-//}
+}
 ?>
