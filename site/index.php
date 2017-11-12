@@ -25,7 +25,7 @@ if($data->action == "create")
 
 	// set parameters and execute
 	$user = $data->username;
-	$pass = $data->password;
+	$pass = password_hash($data->password, PASSWORD_DEFAULT);
 	$first = $data->first;
 	$last = $data->last;
 	if(!$stmt->execute())
@@ -55,7 +55,8 @@ else
 
     $stmt->bind_result($dbpassword);
     $stmt->fetch();
-    if($dbpassword != $data->password)
+
+    if(password_verify ($data->password , PASSWORD_DEFAULT))
     {    	
 		$result = "Try Again.";
 		$json = json_encode($result);
