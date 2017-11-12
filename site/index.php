@@ -1,5 +1,3 @@
-<html>
-
 <?php
 $servername = "129.161.69.63";
 $username = "user";
@@ -14,10 +12,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$data = json_decode($_POST["json"]);
+$data = json_decode(urldecode($_POST["json"]));
+//print_r($data);
 // var_dump($data);
 // echo $data->action;
-if($data->action == "create")
+if(property_exists("data","action"))
 {
 	// prepare and bind
 	$stmt = $conn->prepare("INSERT INTO users (username,password,first_name,last_name) VALUES (?, ?, ?, ?)");
@@ -67,7 +66,7 @@ else
 	    session_start();
 	    $_SESSION["logged_in"] = true;
 	    $_SESSION["username"] = $user;
-	    $json = json_encode(session_id());
+		$json = '{"id":"' . session_id() . '"}';
 	    echo $json;
     }
 	$stmt->close();
@@ -75,5 +74,3 @@ else
 
 $conn->close();
 ?>
-
-</html>

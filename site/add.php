@@ -15,11 +15,12 @@ if($_SESSION["logged_in"]=true)
 	}
 
 	// prepare and bind
-	$question = json_decode($_POST["json"]);
+	$question = json_decode(urldecode($_POST["json"]));
 	//print_r($question);
 	//echo($_SESSION["username"]);
-	$stmt = $conn->prepare("INSERT INTO questions (question,description,asker,lat,lng,tags,accepted_answer,rating,time) VALUES (?,?,?,?,?,?,0,?,?)");
-	$stmt->bind_param("sssddsis", $question->title,$question->description,$_SESSION["username"], $question->meta->lat,$question->meta->long,$question->meta->tags,$question->rating,$question->meta->time);
+	$stmt = $conn->prepare("INSERT INTO questions (question,description,asker,lat,lng,accepted_answer,rating,time) VALUES (?,?,?,?,?,0,0,?)");
+	echo($_SESSION["username"] . "\n");
+	$stmt->bind_param("sssdds", $question->title,$question->description,$_SESSION["username"], $question->meta->lat,$question->meta->lng,$question->meta->time);
 	$testing = "something";
 	// set parameters and execute
 	$stmt->execute();
@@ -29,5 +30,9 @@ if($_SESSION["logged_in"]=true)
 
 	$conn->close();
 
+}
+else
+{
+	echo("Not logged in!");
 }
 ?>

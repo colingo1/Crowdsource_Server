@@ -15,7 +15,7 @@ $dbname = "crowdsourcing";
 	}
 
 	// prepare and bind
-	$answer = json_decode($_POST["json"]);
+	$answer = json_decode(url_decode($_POST["json"]));
 	print_r($answer);
 	//echo($_SESSION["username"]);
 	$stmt = $conn->prepare("INSERT INTO answers (answer,question_id,username,rating,image) VALUES (?,?,?,0,0)");
