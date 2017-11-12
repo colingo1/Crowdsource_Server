@@ -15,8 +15,7 @@ $dbname = "crowdsourcing";
 	}
 
 	// prepare and bind
-	echo(file_get_contents('php://input'));
-	$question_id = $_GET["json"];
+	$question_id = json_decode(url_decode($_POST["json"]));
 	$stmt = $conn->prepare('SELECT * FROM questions WHERE id = ?');
 	$stmt->bind_param("i", $question_id);
 	// set parameters and execute
