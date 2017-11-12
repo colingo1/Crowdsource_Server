@@ -4,8 +4,8 @@ $servername = "129.161.69.63";
 $db_username = "user";
 $db_password = "";
 $dbname = "crowdsourcing";
-if($_SESSION["logged_in"]=true)
-{
+//if($_SESSION["logged_in"]=true)
+//{
 	// Create connection
 	$conn = new mysqli($servername, $db_username, $db_password, $dbname);
 
@@ -15,11 +15,11 @@ if($_SESSION["logged_in"]=true)
 	}
 
 	// prepare and bind
-	$question = json_decode($_POST["json"]);
-	//print_r($question);
+	$answer = json_decode($_POST["json"]);
+	print_r($answer);
 	//echo($_SESSION["username"]);
-	$stmt = $conn->prepare("INSERT INTO questions (question,description,asker,lat,lng,tags,accepted_answer,rating,time) VALUES (?,?,?,?,?,?,0,?,?)");
-	$stmt->bind_param("sssddsis", $question->title,$question->description,$_SESSION["username"], $question->meta->lat,$question->meta->long,$question->meta->tags,$question->rating,$question->meta->time);
+	$stmt = $conn->prepare("INSERT INTO answers (answer,question_id,username,rating,image) VALUES (?,?,?,0,0)");
+	$stmt->bind_param("sis", $answer->content,$answer->question,$_SESSION["username"]);
 	$testing = "something";
 	// set parameters and execute
 	$stmt->execute();
@@ -29,5 +29,5 @@ if($_SESSION["logged_in"]=true)
 
 	$conn->close();
 
-}
+//}
 ?>
