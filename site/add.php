@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 $servername = "129.161.69.63";
@@ -18,8 +17,8 @@ $dbname = "crowdsourcing";
 	// prepare and bind
 	$question = json_decode($_POST["json"]);
 	print_r($question);
-	$stmt = $conn->prepare("INSERT INTO questions (question,asker,location,tags,accepted_answer,rating) VALUES (?,?,?,?,0,?)");
-	$stmt->bind_param("ssssi", $question->title, $testing, $question->location,$question->tags,$question->rating);
+	$stmt = $conn->prepare("INSERT INTO questions (question,description,asker,location,tags,accepted_answer,rating) VALUES (?,?,?,?,?,0,?)");
+	$stmt->bind_param("sssssi", $question->title,$question->description,$testing, $question->location,$question->tags,$question->rating);
 	$testing = "something";
 	// set parameters and execute
 	$stmt->execute();
