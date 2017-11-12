@@ -65,6 +65,8 @@ else
     else
     {
 	    session_start();
+	    $_SESSION["logged_in"] = true;
+	    $_SESSION["username"] = $user;
 	    $json = json_encode(session_id());
 	    echo $json;
     }
